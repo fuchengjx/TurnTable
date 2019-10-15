@@ -1,3 +1,4 @@
+/* 清除默认的样式 */
 html, body {
   margin: 0;
   padding: 0;
@@ -5,6 +6,7 @@ html, body {
   outline: none;
 }
 
+/* TurnTable的整体 */
 .wrapper {
   position: relative;
   height: 200px;
@@ -15,6 +17,7 @@ html, body {
   box-shadow: #000000 0px 0px 10px;
   border-radius: 50%;
 }
+/* 内圆 */
 .panel {
   position: relative;
   display: flex;
@@ -25,7 +28,9 @@ html, body {
   background-color: #b7b7b7;
   border-radius: 100px;
 }
+/* 转盘中心圆 */
 .pointer {
+  position: relative;
   height: 30px;
   width: 30px;
   padding: 6px;
@@ -35,4 +40,81 @@ html, body {
   border-radius: 50%;
   border: 1px solid #c0381f;
   text-align: center;
+}
+/* 转盘指针部分 */
+.pointer::before {
+  position: absolute;
+  left: 14px;
+  top: -24px;
+  content: '';
+  border: solid;
+  border-width: 12px 6px;
+  border-color: transparent;
+  border-bottom-color: #c0381f;
+}
+
+/* 扇形奖品区 */
+.sector {
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  border-radius: 0px 100px 100px 0;
+  overflow: hidden;
+  left: 100px;
+  top: 0px;
+  transform-origin: left center;
+  font-size: 15px;
+}
+.sector:nth-child(1) {
+  transform: rotate(-18deg);
+}
+.sector:nth-child(2) {
+  transform: rotate(18deg);
+}
+.sector:nth-child(3) {
+  transform: rotate(54deg);
+}
+.sector:nth-child(4) {
+  transform: rotate(90deg);
+}
+.sector:nth-child(5) {
+  transform: rotate(126deg);
+}
+.sector:nth-child(6) {
+  transform: rotate(162deg);
+}
+.sector:nth-child(7) {
+  transform: rotate(198deg);
+}
+.sector:nth-child(8) {
+  transform: rotate(234deg);
+}
+.sector:nth-child(9) {
+  transform: rotate(270deg);
+}
+.sector:nth-child(10) {
+  transform: rotate(306deg);
+}
+.sector:nth-child(2n+1) .sector-inner {
+  background: #fef6e0;
+}
+ .sector:nth-child(2n) .sector-inner {
+  background: #ffffff;
+}
+.sector-inner {
+  text-align: center;
+  display: block;
+  width: 40px;
+  padding: 5px 3px 0 57px;
+  height: 195px;
+  background: #ffeab1;
+  transform: translateX(-100px) rotate(36deg);
+  transform-origin: right center;
+  border-radius: 100px 0 0 100px;
+}
+.sector-inner span {
+  display: block;
+  transform-origin: center;
+  transform: rotate(-19deg);
+  color: #d46854;
 }
