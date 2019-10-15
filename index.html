@@ -6,6 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TurnTable</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    .pointer-rotate {
+      animation-name: rotatefresh;
+      animation-duration: 3s;
+      animation-timing-function: linear;
+    }
+    @keyframes rotatefresh {
+      from {
+        transform: rotateZ(0deg);
+    }
+      to {
+        transform: rotateZ(1080deg);
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="wrapper">
@@ -73,5 +88,65 @@
       <div class="pointer">开始抽奖</div>
     </div>
   </div>
+  <div class="result">
+
+  </div>
+  <script>
+    let pointer = document.getElementsByClassName('pointer')[0]
+    let result = document.getElementsByClassName('result')[0]
+    let onRotation = false; // 记录当前是否正在旋转，如果正在旋转，就不能继续点击了
+    let reward = ['谢谢参与', '50积分', '谢谢参与', '100元话费', '50积分',
+        '谢谢参与', '100元话费', '谢谢参与', '50积分', '10元话费']
+    
+    let getReward = function () {
+      currentDeg = 0;  // 当前角度数
+      return function (params) {
+        let rotateDeg = Math.random() * 360 + 1080; // 转三圈到四圈
+        currentDeg += rotateDeg
+        console.log('currentDeg', currentDeg)
+        let rewardText = reward[Math.floor((currentDeg + 18) % 360 / 36)]  // 判断转到了那个结果
+        return {
+          deg: currentDeg,
+          text: rewardText === '谢谢参与' ? '很遗憾，您没有获得奖品。' : '恭喜获得: ' + rewardText
+        }
+      }
+    }
+
+    pointer.addEventListener('click', function () {
+      if (!onRotation) {
+        console.log('开始抽奖')
+        onRotation = true
+        let nextStatus = (getReward())()
+        console.log(nextStatus)
+        result.innerHTML = nextStatus.text
+        result.style.display = 'none'
+        // pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
+
+        let SS = document.styleSheets;
+        SS[1].cssRules[1].cssText = `@keyframes rotatefresh { 0% {transform: rotateZ(0deg)} 100% {transform: rotateZ(${nextStatus.deg}deg) }} `
+        setTimeout(() => {
+          pointer.setAttribute("style", "animation-name: rotatefresh; animation-duration: 3s;")
+          // pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
+        }, 300);
+
+        
+       
+        // for (var i = 0; i < SS.length; i++) {
+        //   console.log(SS[1].cssRules)
+        //   // for (var j = 0; j < SS[i].cssRules.length; j++)
+        //   // console.log(SS[0].cssRules[j])
+        // }
+        // pointer.innerHTML = `@keyframes rotatefresh { 0% {transform: rotateZ(0deg)} 100% {transform: rotateZ(${nextStatus.deg}deg) }} `
+      }
+      console.log('抽奖结束');
+      onRotation = false;
+      result.style.display = 'block';
+    })
+    // pointer.addEventListener('transitionend', () => {
+    //   console.log('抽奖结束');
+    //   onRotation = false;
+    //   result.style.display = 'block';
+    // })
+  </script>
 </body>
-</html>  
+</html>

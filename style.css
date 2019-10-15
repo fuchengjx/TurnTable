@@ -172,3 +172,19 @@ html, body {
   50% { background-color: #d5df7d }
   100% { background-color: #d4eb06 }
 }
+
+/* .pointer-rotate {
+  animation-name: rotatefresh;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+}
+@keyframes rotatefresh {
+  from {
+    transform: rotateZ(0deg);
+}
+  to {
+    transform: rotateZ(360deg);
+  }
+} */
+
+
