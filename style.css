@@ -1,0 +1,38 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+.wrapper {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  padding: 20px;
+  margin: 120px auto;
+  background-color: #c0381f;
+  box-shadow: #000000 0px 0px 10px;
+  border-radius: 50%;
+}
+.panel {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  width: 200px;
+  background-color: #b7b7b7;
+  border-radius: 100px;
+}
+.pointer {
+  height: 30px;
+  width: 30px;
+  padding: 6px;
+  color: #fff899;
+  font-size: 12px;
+  background-color: #dc5b5b;
+  border-radius: 50%;
+  border: 1px solid #c0381f;
+  text-align: center;
+}
