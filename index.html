@@ -6,21 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>TurnTable</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <style>
-    .pointer-rotate {
-      animation-name: rotatefresh;
-      animation-duration: 3s;
-      animation-timing-function: linear;
-    }
-    @keyframes rotatefresh {
-      from {
-        transform: rotateZ(0deg);
-    }
-      to {
-        transform: rotateZ(1080deg);
-      }
-    }
-  </style>
 </head>
 <body>
   <div class="wrapper">
@@ -98,11 +83,15 @@
     let reward = ['谢谢参与', '50积分', '谢谢参与', '100元话费', '50积分',
         '谢谢参与', '100元话费', '谢谢参与', '50积分', '10元话费']
     
+    let preDeg = []  // 记录之前的度数
+    let i = 0
     let getReward = function () {
       currentDeg = 0;  // 当前角度数
-      return function (params) {
-        let rotateDeg = Math.random() * 360 + 1080; // 转三圈到四圈
+      return function () {
+        let rotateDeg = Math.random() * 360 + 1800; // 转三圈到四圈
+        
         currentDeg += rotateDeg
+        preDeg[i++] = currentDeg % 360
         console.log('currentDeg', currentDeg)
         let rewardText = reward[Math.floor((currentDeg + 18) % 360 / 36)]  // 判断转到了那个结果
         return {
@@ -120,33 +109,24 @@
         console.log(nextStatus)
         result.innerHTML = nextStatus.text
         result.style.display = 'none'
-        // pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
-
-        let SS = document.styleSheets;
-        SS[1].cssRules[1].cssText = `@keyframes rotatefresh { 0% {transform: rotateZ(0deg)} 100% {transform: rotateZ(${nextStatus.deg}deg) }} `
-        setTimeout(() => {
-          pointer.setAttribute("style", "animation-name: rotatefresh; animation-duration: 3s;")
-          // pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
-        }, 300);
-
-        
-       
-        // for (var i = 0; i < SS.length; i++) {
-        //   console.log(SS[1].cssRules)
-        //   // for (var j = 0; j < SS[i].cssRules.length; j++)
-        //   // console.log(SS[0].cssRules[j])
-        // }
-        // pointer.innerHTML = `@keyframes rotatefresh { 0% {transform: rotateZ(0deg)} 100% {transform: rotateZ(${nextStatus.deg}deg) }} `
+        pointer.animate([
+           { transform: `rotateZ(${ preDeg[i-1] }deg)` } ,
+           { transform: `rotateZ(${ nextStatus.deg }deg)` }
+        ], {
+          duration: 3000,
+          easing: "cubic-bezier(0, 0, 0.58, 1)"
+        })
+        console.log(nextStatus.deg)
+        console.log(i , preDeg[i-1])
+          // pointer.setAttribute("style", "animation-name: rotatefresh; animation-duration: 3s;")
+          pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
       }
       console.log('抽奖结束');
       onRotation = false;
-      result.style.display = 'block';
+      setTimeout(() => {
+         result.style.display = 'block';
+      }, 3000);
     })
-    // pointer.addEventListener('transitionend', () => {
-    //   console.log('抽奖结束');
-    //   onRotation = false;
-    //   result.style.display = 'block';
-    // })
   </script>
 </body>
 </html>
