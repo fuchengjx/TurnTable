@@ -88,8 +88,7 @@
     let getReward = function () {
       currentDeg = 0;  // 当前角度数
       return function () {
-        let rotateDeg = Math.random() * 360 + 1800; // 转三圈到四圈
-        
+        let rotateDeg = Math.random() * 360 + 1800; // 转5圈到6圈
         currentDeg += rotateDeg
         preDeg[i++] = currentDeg % 360
         console.log('currentDeg', currentDeg)
@@ -116,15 +115,12 @@
           duration: 3000,
           easing: "cubic-bezier(0, 0, 0.58, 1)"
         })
-        console.log(nextStatus.deg)
-        console.log(i , preDeg[i-1])
-          // pointer.setAttribute("style", "animation-name: rotatefresh; animation-duration: 3s;")
-          pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
+        pointer.style.transform = `rotateZ(${nextStatus.deg}deg)`
       }
-      console.log('抽奖结束');
-      onRotation = false;
       setTimeout(() => {
-         result.style.display = 'block';
+        result.style.display = 'block';
+        onRotation = false;
+        console.log('抽奖结束');
       }, 3000);
     })
   </script>
