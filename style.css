@@ -1,21 +1,30 @@
 @media (min-width: 500px) {
   .wrapper {
+    top: 100px;
     transform: scale(1.2);
+  }
+}
+@media (min-width: 800px) {
+  .wrapper {
+    top: 150px;
+    transform: scale(1.5);
   }
 }
 @media (min-width: 1000px) {
   .wrapper {
-    /* top: 200px; */
+    top: 200px;
     transform: scale(2);
   }
 }
 
 /* 清除默认的样式 */
-html, body {
+ html,body {
   margin: 0;
   padding: 0;
   border: none;
   outline: none;
+}
+html {
   height: 100%;
 }
 
@@ -29,7 +38,6 @@ html, body {
   background-color: #c0381f;
   box-shadow: #000000 0px 0px 10px;
   border-radius: 50%;
-  /* transform: translateY(50%); */
 }
 
 /* 内圆 */
