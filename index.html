@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="wrapper">
+    <!-- <div class="light"></div>
     <div class="light"></div>
     <div class="light"></div>
     <div class="light"></div>
@@ -17,10 +18,9 @@
     <div class="light"></div>
     <div class="light"></div>
     <div class="light"></div>
-    <div class="light"></div>
-    <div class="light"></div>
+    <div class="light"></div> -->
     <div class="panel">
-      <div class="sector">
+      <!-- <div class="sector">
         <div class="sector-inner">
           <span>谢谢参与</span>
         </div>
@@ -69,7 +69,7 @@
         <div class="sector-inner">
           <span>谢谢参与</span>
         </div>
-      </div>
+      </div> -->
       <div class="pointer">开始抽奖</div>
     </div>
   </div>
@@ -82,7 +82,31 @@
     let onRotation = false; // 记录当前是否正在旋转，如果正在旋转，就不能继续点击了
     let reward = ['谢谢参与', '50积分', '谢谢参与', '100元话费', '50积分',
         '谢谢参与', '100元话费', '谢谢参与', '50积分', '10元话费']
+  
+    function render() {
+      let wrapper = document.getElementsByClassName('wrapper')[0]
+      let panel = document.getElementsByClassName('panel')[0]
+      let pointer = document.getElementsByClassName('pointer')[0]
+      for (let i = 0; i < reward.length; i++) {
+        let light = document.createElement('div')
+        light.className = 'light'
+        wrapper.insertBefore(light, panel)
+
+        let sector = document.createElement('div')
+        sector.className = 'sector'
+        let sector_inner = document.createElement('div')
+        sector_inner.className = 'sector-inner'
+        let span = document.createElement('span')
+        let textNode = document.createTextNode(`${reward[i]}`)
+        span.appendChild(textNode)
+        sector_inner.appendChild(span)
+        sector.appendChild(sector_inner)
+        panel.insertBefore(sector, pointer)
+      }
+    }
+    render()
     
+
     let preDeg = []  // 记录之前的度数
     let i = 0
     let getReward = function () {
@@ -124,5 +148,8 @@
       }, 3000);
     })
   </script>
+  <noscript>
+    <p>本页面需要在浏览器支持启用JavaScript</p>
+  </noscript>
 </body>
 </html>
