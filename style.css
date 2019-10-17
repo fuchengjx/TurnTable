@@ -1,9 +1,22 @@
+@media (min-width: 500px) {
+  .wrapper {
+    transform: scale(1.2);
+  }
+}
+@media (min-width: 1000px) {
+  .wrapper {
+    /* top: 200px; */
+    transform: scale(2);
+  }
+}
+
 /* 清除默认的样式 */
 html, body {
   margin: 0;
   padding: 0;
   border: none;
   outline: none;
+  height: 100%;
 }
 
 /* TurnTable的整体 */
@@ -12,10 +25,11 @@ html, body {
   height: 200px;
   width: 200px;
   padding: 20px;
-  margin: 120px auto;
+  margin: 120px auto 80px;
   background-color: #c0381f;
   box-shadow: #000000 0px 0px 10px;
   border-radius: 50%;
+  /* transform: translateY(50%); */
 }
 
 /* 内圆 */
