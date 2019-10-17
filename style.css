@@ -17,6 +17,7 @@ html, body {
   box-shadow: #000000 0px 0px 10px;
   border-radius: 50%;
 }
+
 /* 内圆 */
 .panel {
   position: relative;
@@ -133,13 +134,18 @@ html, body {
 }
 .light:nth-child(2n) {
   background-color: #fafce7;
-  animation-name: blink;
+  animation-name: double-blink;
   animation-duration: 3s;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 .light:nth-child(2n+1) {
   background-color: #ffe58b;
+  animation-name: single-blink;
+  animation-delay: 0.5s;
+  animation-duration: 3s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 }
 .light:nth-child(2) {
   transform: rotate(36deg);
@@ -169,10 +175,19 @@ html, body {
   transform: rotate(324deg);
 }
 /* 灯光动画 */
-@keyframes blink {
-  0% { background-color: #fafce7; }
+@keyframes single-blink {
+  0% { background-color: #ffe58b}
+  50% { background-color: #e6ba1e}
+  100% { background-color: #f5c002}
+}
+@keyframes double-blink {
+  0% { background-color: #fafce7 }
   50% { background-color: #d5df7d }
   100% { background-color: #d4eb06 }
 }
 
-
+/* 最后的结果部分 */
+.result {
+  text-align: center;
+  font-size: 16px;
+}
